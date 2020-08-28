@@ -67,7 +67,7 @@ confluence = atlassian.confluence.Confluence(
 )
 grafana = Grafana(
     url='http://grafana.aws.example.com:3000',
-    auth_header='Bearer eyJrIjoib1Y3R0I2Zm84ZEVBUk1JbDJ4dTNpR3BLdDY2R0RzbEciLCJuIjoiUGVyZlJlcG9ydCIsImlkIjoxfQ=='
+    auth_header='Token'
 )
 
 # clean workspace
