@@ -1,0 +1,10 @@
+POST {{ app }}/api/v1/sso/login
+Content-Type: application/x-www-form-urlencoded
+
+user_login=perftest@example.com&user_password=perftest
+###
+
+GET https://app-perf.example.com/api/v1/users/search?login_name=perftest@example.com
+Accept: application/json
+
+###

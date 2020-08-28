@@ -1,0 +1,68 @@
+pipeline {
+    agent any
+    parameters {
+        choice(
+            name: 'environment',
+            choices: [
+                'prod',
+                'perf',
+            ],
+            description: 'Sources: jupiter kibana prod or nonprod'
+        )
+        choice(
+            name: 'service',
+            choices: [
+                'service-auth',
+                'service-meta',
+                'service-search',
+                'service-content',
+            ],
+            description: 'Choose service for which to collect statistics'
+        )
+        string(
+            name: 'period',
+            defaultValue: '2019/10/21T05:00:00-2019/10/28T05:00:00',
+            description: 'Example: 2019/09/02T05:00:00-2019/09/09T05:00:00'
+        )
+        string(
+            name: 'day_of_period',
+            defaultValue: 'None',
+            description: 'Example: 2019/00/00T05:00:00-2019/00/00T05:00:00'
+        )
+    }
+    stages {
+        stage('Collect Prod Statistics') {
+            steps {
+                script {
+                    currentBuild.displayName = "#${BUILD_NUMBER} ${environment} ${service}"
+                    // currentBuild.description = "The best description."
+                }
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [
+                        [name: '*/master']
+                    ],
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [],
+                    submoduleCfg: [],
+                    userRemoteConfigs: [
+                        [credentialsId: 'wmuser-knlhe', url: 'git@github.com:example/perf-app.git']
+                    ]
+                ])
+                dir('stat-collector') {
+                    sh '''
+                    ls
+                    python3 -m venv virtualenv
+                    source virtualenv/bin/activate
+                    python -m pip install --upgrade pip
+                    python -m pip install -r requirements.txt
+                    python -m pip freeze
+                    python -u elk_collect_stat.py ${environment} ${service} ${period} ${day_of_period}
+
+                    printf '%s production statistics successfully collected!' $service
+                    '''
+                }
+            }
+        }
+    }
+}

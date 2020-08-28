@@ -1,0 +1,25 @@
+GET https://jupiter.aws.example.com:9200/app-*/_search?size=0
+Authorization: Basic perftest perftest
+
+###
+
+GET https://jupiter.aws.example.com:9200/app-*/_search?size=0
+Authorization: Basic perftest perftest
+
+###
+
+GET https://jupiterqa.aws.example.com:9200/app-*perf-*/_search?size=0
+Authorization: Basic perftest perftest
+
+###
+
+GET https://jupiterqa.aws.example.com:9200/app-*perf-*/_search?size=0
+Authorization: Basic perftest perftest
+
+###
+
+POST https://jupiterqa.aws.example.com:9200/app-*perf-*/_search?size=0
+Authorization: Basic perftest perftest
+
+
+###

@@ -1,0 +1,203 @@
+<ac:layout>
+    <ac:layout-section ac:type="two_right_sidebar">
+        <ac:layout-cell>
+            <table>
+                <tbody>
+                    <tr>
+                        <th colspan="2">
+                            <h1 style="text-align: center;">General Information</h1>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Test Name</th>
+                        <td>{{ test.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Test Period</th>
+                        <td>{{ test.start_time }} - {{ test.end_time }}</td>
+                    </tr>
+                    <tr>
+                        <th>Test Duration</th>
+                        <td>{{ test.duration }}</td>
+                    </tr>
+                    <tr>
+                        <th>Test Scope</th>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>Test Goals</th>
+                        <td>
+                            Verify that transactions response times and server-side resource utilization meet SLA
+                            <br/>
+                            Verify that there is no performance degradation over the previous release
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Test Outcomes</th>
+                        <td>
+                            Transactions response times and server-side resource utilization meet SLA
+                            <br/>
+                            There is no performance degradation over the previous release
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h1>Test Environment</h1>
+            <h2>UIs</h2>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Application</th>
+                        <th>Version</th>
+                    </tr>
+                    {% for app in apps %}
+                        {% if "-ui" in app %}
+                        <tr>
+                            <th>{{ app }}</th>
+                            <td>
+                                <a href="{{ environment[app]['check_version_url'] }}">{{ environment[app]['version'] }}</a>
+                            </td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+            <h2>Applications</h2>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Application</th>
+                        <th>Version</th>
+                        <th>Dashboard</th>
+                        <th>AWS ASG</th>
+                        <th>Instance ID</th>
+                    </tr>
+                    {% for app in apps %}
+                        {% if "-ui" not in app and "-db" not in app %}
+                            <tr>
+                                {% if environment[app].check_version_url %}
+                                    <th>{{ app }}</th>
+                                    <td>
+                                        <a href="{{ environment[app]['check_version_url'] }}">{{ environment[app]['version'] }}</a>
+                                    </td>
+                                {% else %}
+                                    <th>{{ app }}</th>
+                                    <td></td>
+                                {% endif %}
+                                <td>
+                                    {% if 'dashboard' in environment[app] %}
+                                        {% if 'dynatrace-perf' in environment[app]['dashboard'] %}
+                                            <a href="{{ environment[app]['dashboard']['dynatrace-perf'] }}">dynatrace</a><br/>
+                                        {% endif %}
+                                        {% if 'cloudwatch' in environment[app]['dashboard'] %}
+                                            <a href="{{ environment[app]['dashboard']['cloudwatch'] }}">cloudwatch</a>
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if environment[app]['[AWS]AutoScalingGroup'] %}
+                                        <a href="https://console.aws.amazon.com/ec2/autoscaling/home?region=us-east-1#AutoScalingGroups:filter={{ environment[app]['[AWS]AutoScalingGroup'] }};view=instances">
+                                            {{ app }}
+                                        </a>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% for instance in environment[app]['instances'] %}
+                                        <a href="https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Instances:search={{ instance }}">
+                                            {{ instance }}
+                                        </a>
+                                        <br/>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+            <h2>Databases</h2>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Database</th>
+                        <th>Platform</th>
+                        <th>Schema</th>
+                        <th>Dashboard</th>
+                        <th>Instance ID</th>
+                    </tr>
+                    {% for app in apps %}
+                        {% if "-db" in app %}
+                            <tr>
+                                <th>{{ app }}</th>
+                                <td>
+                                    {{ environment[app]['platform'] }}
+                                </td>
+                                <td>
+                                    {{ environment[app]['schema'] }}
+                                </td>
+                                <td>
+                                    {% if 'dashboard' in environment[app] %}
+                                        {% if 'dynatrace-perf' in environment[app]['dashboard'] %}
+                                            <a href="{{ environment[app]['dashboard']['dynatrace-perf'] }}">dynatrace</a><br/>
+                                        {% endif %}
+                                        {% if 'cloudwatch' in environment[app]['dashboard'] %}
+                                            <a href="{{ environment[app]['dashboard']['cloudwatch'] }}">cloudwatch</a>
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% for instance in environment[app]['instances'] %}
+                                        <a href="https://console.aws.amazon.com/ec2/v2/home?region=us-east-1#Instances:search={{ instance }}">
+                                            {{ instance }}
+                                        </a>
+                                        <br/>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+            <h1>Test Results</h1>
+            <h2>Transaction Summary</h2>
+            {{ transaction_summary|safe }}
+            <h2>HTTP Responses Summary</h2>
+            {{ http_responses_summary|safe }}
+            {% for ltr in lr_test_results %}
+                <h2>{{ ltr.name }}</h2>
+                <ac:image ac:width="800">
+                    <ri:attachment ri:filename="{{ ltr.filename }}"/>
+                </ac:image>
+                <ac:structured-macro ac:name="expand">
+                    <ac:parameter ac:name="title">{{ ltr.name }} Legend</ac:parameter>
+                    <ac:rich-text-body>
+                        <ac:structured-macro ac:macro-id="6caa7f91-d2b5-4a2b-a456-d36f1f6f975f" ac:name="html"
+                                             ac:schema-version="1">
+                            <ac:plain-text-body>
+                                <![CDATA[{{ ltr.legend|safe }}]]>
+                            </ac:plain-text-body>
+                        </ac:structured-macro>
+                    </ac:rich-text-body>
+                </ac:structured-macro>
+            {% endfor %}
+            <h1>Resource Utilization</h1>
+            {% for res_util in resource_utilization %}
+                <h2>{{ res_util.name }}</h2>
+                <ac:image ac:width="800">
+                    <ri:attachment ri:filename="{{ res_util.file }}"/>
+                </ac:image>
+            {% endfor %}
+        </ac:layout-cell>
+        <ac:layout-cell>
+            <ac:structured-macro ac:name="toc">
+                <ac:parameter ac:name="type">list</ac:parameter>
+                <ac:parameter ac:name="style">square</ac:parameter>
+                <ac:parameter ac:name="minLevel">1</ac:parameter>
+                <ac:parameter ac:name="maxLevel">4</ac:parameter>
+                <ac:parameter ac:name="printable">true</ac:parameter>
+                <ac:parameter ac:name="indent">25px</ac:parameter>
+                <ac:parameter ac:name="class">bigpink</ac:parameter>
+                <ac:parameter ac:name="outline">false</ac:parameter>
+            </ac:structured-macro>
+        </ac:layout-cell>
+    </ac:layout-section>
+</ac:layout>

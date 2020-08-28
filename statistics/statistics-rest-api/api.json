@@ -1,0 +1,1096 @@
+{
+    "service-lti": [
+        {
+            "transaction": "",
+            "class.method": "LtiRestService.assessmentLti",
+            "request": "POST /application/api/v1/lti/products/{product_uuid}/assessments/{assessment_uuid}",
+            "filter": "\"POST /application/api/v1/lti/products\" && \"assessments\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LtiRestService.cplayerLti",
+            "request": "POST /application/api/v1/lti/products/{product_uuid}/items/{item}",
+            "filter": "\"POST /application/api/v1/lti/products\" && \"items\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LtiRestService.vitalSourceLti",
+            "request": "POST /application/api/v1/lti/ebook/{ebook_uuid}",
+            "filter": "\"POST /application/api/v1/lti/ebook\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LtiRestService.orionRequest",
+            "request": "POST /application/api/v1/lti/orion/{product_uuid}/target/{chapter}",
+            "filter": "\"POST /application/api/v1/lti/orion\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LtiRestService.discoveryTool",
+            "request": "POST /application/api/v1/lti/discoverytool",
+            "filter": "\"POST /application/api/v1/lti/discoverytool\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LtiRestService.wpResourceLti",
+            "request": "GET /application/api/v1/lti/courses/{course}/resources/{resource}",
+            "filter": "\"GET /application/api/v1/lti/courses\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LtiRestService.assessmentProgressLti",
+            "request": "POST /application/api/v1/lti/assessments/{progress}",
+            "filter": "\"POST /application/api/v1/lti/assessments\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LtiRestService.retrieveLti",
+            "request": "GET /application/api/v1/lti/retrieve?url={url}",
+            "filter": "\"GET /application/api/v1/lti/retrieve\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LtiRestService.safariAuth",
+            "request": "GET /application/api/v1/lti/cookie-resolver",
+            "filter": "\"GET /application/api/v1/lti/cookie-resolver\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LtiRestService.contentPlayerOrion",
+            "request": "POST /application/api/v1/lti/contentplayer/products/{product}/chapters/{chapter}/so/{so}",
+            "filter": "\"POST /application/api/v1/lti/contentplayer/products/\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LtiRestService.courseManagement",
+            "request": "POST /application/api/v1/lti/instructor-admin",
+            "filter": "\"POST /application/api/v1/lti/instructor-admin\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LtiRestService.discovery",
+            "request": "POST /application/api/v1/lti/",
+            "filter": "\"POST /application/api/v1/lti HTTP\""
+        }
+    ],
+    "service-sso": [
+        {
+            "transaction": "all requests",
+            "class.method": "service-sso api",
+            "request": "/application/api/v1/sso",
+            "filter": "\"/application/api/v1/sso\" && !\"/version HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "JWTController.validateToken",
+            "request": "POST /application/api/v1/sso/jwt/validate?token={token}",
+            "filter": "\"POST /application/api/v1/sso/jwt/validate\""
+        },
+        {
+            "transaction": "",
+            "class.method": "JWTController.handleServerSideLogin",
+            "request": "POST /application/api/v1/sso/jwt/trustedlogin",
+            "filter": "\"POST /application/api/v1/sso/jwt/trustedlogin\""
+        },
+        {
+            "transaction": "",
+            "class.method": "JWTController.handleUserLogin",
+            "request": "POST /application/api/v1/sso/jwt/login",
+            "filter": "\"POST /application/api/v1/sso/jwt/login\""
+        },
+        {
+            "transaction": "",
+            "class.method": "JWTController.getKeys",
+            "request": "GET /application/api/v1/sso/jwt/keys",
+            "filter": "\"GET /application/api/v1/sso/jwt/keys\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LoginController.handleCanvasLogin",
+            "request": "GET /application/api/v1/sso/cas/login?service=https://learn.exampleplus.com/login/cas",
+            "filter": "\"GET /application/api/v1/sso/cas/login\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LoginController.handleLogin",
+            "request": "POST /application/api/v1/sso/cas/login?service=https://learn.exampleplus.com/login/cas",
+            "filter": "\"POST /application/api/v1/sso/cas/login\""
+        },
+        {
+            "transaction": "",
+            "class.method": "OKTAController.handleUserLogin",
+            "request": "GET /application/api/v1/sso/okta/login?returnUrl=https://app-perf.example.com/admin/index.html#/?tool_identifier=cap",
+            "filter": "\"GET /application/api/v1/sso/okta/login\""
+        },
+        {
+            "transaction": "",
+            "class.method": "OKTAController.handleOktaAuthorize",
+            "request": "GET /application/api/v1/sso/okta/authorize?code={code}",
+            "filter": "\"GET /application/api/v1/sso/okta/authorize\""
+        },
+        {
+            "transaction": "",
+            "class.method": "OKTAController.handleOktaPostLogout",
+            "request": "GET /application/api/v1/sso/okta/postlogout?state=cap",
+            "filter": "\"GET /application/api/v1/sso/okta/postlogout\""
+        },
+        {
+            "transaction": "",
+            "class.method": "OKTAController.handleUserLogout",
+            "request": "GET /application/api/v1/sso/okta/logout?tool_identifier=cap",
+            "filter": "\"GET /application/api/v1/sso/okta/logout\""
+        }
+    ],
+    "service-courses":  [
+        {
+            "transaction": "all requests",
+            "class.method": "service-courses api",
+            "request": "/application/api/v2/courses || /application/api/v2/sections || /application/api/v2/lmssections",
+            "filter": "(\"/application/api/v2/courses\" || \"/application/api/v2/sections\" || \"/application/api/v2/lmssections\") && !\"/version HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseController.updateCourse",
+            "request": "PUT /application/api/v2/courses/{course_uuid}",
+            "filter": "\"PUT /application/api/v2/courses\" && !\"copy\" && !\"edit\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseController.copyCourse",
+            "request": "POST /application/api/v2/courses/{course_uuid}/copy",
+            "filter": "\"POST /application/api/v2/courses\" && \"copy\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseSectionController.getCourseSection",
+            "request": "GET /application/api/v2/sections/{section_uuid}",
+            "filter": "\"GET /application/api/v2/sections\" && !\"courseflyer\" && !\"findByCourseKey\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseSectionController.getCourseFlyer",
+            "request": "GET /application/api/v2/sections/courseflyer?sectionKey={section_key}",
+            "filter": "\"GET /application/api/v2/sections/courseflyer\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseSectionController.updateCourseSection",
+            "request": "PUT /application/api/v2/sections/{section_uuid}",
+            "filter": "\"PUT /application/api/v2/sections\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseSectionController.createCourseSection",
+            "request": "POST /application/api/v2/sections",
+            "filter": "\"POST /application/api/v2/sections\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseSectionController.deleteCourseSection",
+            "request": "DELETE /application/api/v2/sections/{section_uuid}",
+            "filter": "\"DELETE /application/api/v2/sections\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseSectionListController.getCourseSectionsByCourse",
+            "request": "GET /application/api/v2/courses/{course}/sections?start_index=0&stop_index=10&include_total_items_num=true&iana_zone_id=America/New_York",
+            "filter": "\"GET /application/api/v2/courses\" && \"sections\""
+        },
+        {
+            "transaction": "",
+            "class.method": "EnrollmentController.getEnrollmentList",
+            "request": "GET /application/api/v2/courses/{course}/enrollments?start_index=0&stop_index=10&include_total_items_num=true",
+            "filter": "\"GET /application/api/v2/courses\" && \"enrollments\""
+        },
+        {
+            "transaction": "",
+            "class.method": "EnrollmentController.findSectionsToEnrollUser",
+            "request": "GET /application/api/v2/courses/{course}/available_sections",
+            "filter": "\"GET /application/api/v2/courses\" && \"available_sections\""
+        },
+        {
+            "transaction": "",
+            "class.method": "GetCourseDetailsController.courseInfo",
+            "request": "GET /application/api/v2/courses/{course}",
+            "filter": "\"GET /application/api/v2/courses\" && !\"terms\" && !\"timezones\" && !\"enrollments\" && !\"sections\" && !\"available_sections\" && !\"copy\" && !\"edit\" && !\"update\""
+        },
+        {
+            "transaction": "",
+            "class.method": "GetCourseDetailsController.getTermsById",
+            "request": "GET /application/api/v2/courses/terms/{term_id}",
+            "filter": "\"/application/api/v2/courses/terms\" && !\"include\""
+        },
+        {
+            "transaction": "",
+            "class.method": "GetCourseDetailsController.getTerms",
+            "request": "GET /application/api/v2/courses/terms/include/{term_id}?iana_zone_id={iana_zone_id}&access_model={access_model}",
+            "filter": "\"GET /application/api/v2/courses/terms/include\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LmsCourseSectionController.getCourseSection",
+            "request": "GET /application/api/v2/lmssections/{section_uuid}",
+            "filter": "\"GET /application/api/v2/lmssections\""
+        },
+        {
+            "transaction": "",
+            "class.method": "TimeZoneController.getDateInCourseTimeZone",
+            "request": "POST /application/api/v2/courses/getdate",
+            "filter": "\"POST /application/api/v2/courses/getdate\""
+        },
+        {
+            "transaction": "",
+            "class.method": "TimeZoneController.getTimeZones",
+            "request": "GET /application/api/v2/courses/timezones",
+            "filter": "\"GET /application/api/v2/courses/timezones\""
+        },
+        {
+            "transaction": "",
+            "class.method": "TransactionUpdateController.getEditCourseTransactionLog",
+            "request": "GET /application/api/v2/courses/edit/transaction/{transaction_uuid}",
+            "filter": "\"GET /application/api/v2/courses/edit/transaction\""
+        }
+    ],
+    "service-announcements":  [
+        {
+            "transaction": "all requests",
+            "class.method": "service-announcements api",
+            "request": "/application/api/v1/announcements",
+            "filter": "\"/application/api/v1/announcements\" && !\"/version HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "AnnouncementController.findAnnouncements",
+            "request": "GET /application/api/v1/announcements/find?courseKey={course_key}&userKey={user_key}&courseType=example&role={role}&isExpired=false",
+            "filter": "\"GET /application/api/v1/announcements/find?courseKey\""
+        },
+        {
+            "transaction": "",
+            "class.method": "AnnouncementController.dismiss",
+            "request": "POST /application/api/v1/announcements/dismiss?userKey={user_key}&courseType=example",
+            "filter": "\"POST /application/api/v1/announcements/dismiss\""
+        },
+        {
+            "transaction": "",
+            "class.method": "AnnouncementController.saveAnnouncements",
+            "request": "POST /application/api/v1/announcements/",
+            "filter": "\"POST /application/api/v1/announcements HTTP/\""
+        },
+        {
+            "transaction": "",
+            "class.method": "AnnouncementController.getAnnouncementByKey",
+            "request": "GET /application/api/v1/announcements/{announcement_key}",
+            "filter": "\"GET /application/api/v1/announcements\" && !\"find\" && !\"version\""
+        },
+        {
+            "transaction": "",
+            "class.method": "AnnouncementController.updateAnnouncement",
+            "request": "PUT /application/api/v1/announcements/{announcement_key}",
+            "filter": "\"PUT /application/api/v1/announcements/\""
+        }
+    ],
+    "service-course-setup-app":  [
+        {
+            "transaction": "all requests",
+            "class.method": "service-course-setup-app api",
+            "request": "GET /application/api/v1/cap/announcements",
+            "filter": "(\"/application/api/v1/cap\" || \"/application/api/v2/cap\" || \"/application/api/v1/users\" || \"/application/api/v1/institutions\" || \"/application/api/v1/userprofiles\" || \"/application/api/v1/consumers\" || \"/application/api/v1/products\" || \"/application/api/v1/lmsusers\" || \"/application/api/v1/lmscourses\"|| \"/application/api/v1/lmscoursesections\"  || \"/application/api/v1/licenses\" || \"/application/api/v1/enrollments\" || \"/application/api/v1/ecommerce\" || \"/application/api/v1/courses\" || \"/application/api/v1/coursesections\" || \"/application/api/v2/coursesections\" || \"/application/api/v1/announcements\" || \"/application/api/v2/courses\" || \"/application/api/v2/users\" || \"/application/api/v2/lmssections\" || \"/application/api/v2/sections\" || \"/application/api/v1/sections\") && !\"/version HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "AnnouncementController.searchAnnouncements",
+            "request": "GET /application/api/v1/cap/announcements",
+            "filter": "\"GET /application/api/v1/cap/announcements/ HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CanvasCourseService.getBluePrintCourses",
+            "request": "GET /application/api/v1/courses/canvas/bluePrintCourses",
+            "filter": "\"GET /application/api/v1/courses/canvas/bluePrintCourses HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseCAPController.getCourseDetails",
+            "request": "GET /application/api/v1/cap/courses/{course_uuid}",
+            "filter": "\"GET /application/api/v1/cap/courses\" && !\"products\" && !\"terms\" && !\"findEnrollmentsByCourseKey\" && !\"coursesections\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseCAPController.getCourseEnrollmentsApiFirst",
+            "request": "/application/api/v1/cap/courses/findEnrollmentsByCourseKey?courseKey={course_key}&page=0&size=10&role=STUDENT&sort=userProfile.lastName,ASC",
+            "filter": "\"/application/api/v1/cap/courses/findEnrollmentsByCourseKey\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseCAPController.getTerms",
+            "request": "GET /application/api/v1/cap/courses/terms?accessModel=OTHER_INTERNAL_USE",
+            "filter": "\"GET /application/api/v1/cap/courses/terms\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseCAPController.getProducts",
+            "request": "GET /application/api/v1/cap/courses/products",
+            "filter": "\"GET /application/api/v1/cap/courses/products HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseCAPController.getCourseSections",
+            "request": "GET /application/api/v1/cap/courses/{course_uuid}/coursesections",
+            "filter": "\"GET /application/api/v1/cap/courses\" && \"coursesections HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseCAPController.search",
+            "request": "POST /application/api/v1/cap/courses/search",
+            "filter": "\"POST /application/api/v1/cap/courses/search HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseCAPController.updateCourse",
+            "request": "PUT /application/api/v1/cap/courses/{course_uuid}",
+            "filter": "\"PUT /application/api/v1/cap/courses\" && !\"state\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseCAPController.updateCourseState",
+            "request": "PUT /application/api/v1/cap/courses/{course_uuid}/state?state={state}",
+            "filter": "\"PUT /application/api/v1/cap/courses\" && \"state\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseContentExportService.getUserTypes",
+            "request": "GET /application/api/v1/courses/cartridge/user/types",
+            "filter": "\"GET /application/api/v1/courses/cartridge/user/types HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseSectionCAPController.getEnrollmentsByCourseSectionId",
+            "request": "GET /application/api/v1/cap/coursesections/{course_section_uuid}/enrollments?includeLicense=true",
+            "filter": "\"GET /application/api/v1/cap/coursesections\" && \"enrollments\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseSectionCAPController.search",
+            "request": "POST /application/api/v1/cap/coursesections/search",
+            "filter": "\"POST /application/api/v1/cap/coursesections/search HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseSectionCAPController.updateCourseSection",
+            "request": "PUT /application/api/v1/cap/coursesections/{course_section_uuid}",
+            "filter": "\"PUT /application/api/v1/cap/coursesections\" && !\"hide\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseSectionCAPController.createEnrollment",
+            "request": "POST /application/api/v1/cap/coursesections/{course_section_uuid}/enroll",
+            "filter": "\"POST /application/api/v1/cap/coursesections\" && \"enroll HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseSectionCAPController.deleteEnrollment",
+            "request": "DELETE /application/api/v1/cap/coursesections/enrollments",
+            "filter": "\"DELETE /application/api/v1/cap/coursesections/enrollments HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseSectionCAPController.hideSection",
+            "request": "PUT /application/api/v1/cap/coursesections/{course_section_uuid}/hide?isDiscoverable=false",
+            "filter": "\"PUT /application/api/v1/cap/coursesections\" && \"hide\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseSectionCAPController.addCourseSectionToCourse",
+            "request": "POST /application/api/v1/cap/coursesections",
+            "filter": "\"POST /application/api/v1/cap/coursesections HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseSectionCAPControllerV2.getCourseSection",
+            "request": "GET /application/api/v2/cap/coursesections/{course_section_uuid}",
+            "filter": "\"GET /application/api/v2/cap/coursesections\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseSectionController.getLMSCourseSection",
+            "request": "GET /application/api/v1/coursesections/lms/2141",
+            "filter": "\"GET /application/api/v1/coursesections\" && \"lms\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseSectionController.getCourseSection",
+            "request": "GET /application/api/v1/coursesections/17387",
+            "filter": "\"GET /application/api/v1/coursesections\" && !\"lms\" && !\"findByCode\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseSectionController.courseSectionsSearch",
+            "request": "GET /application/api/v1/institutions/3704/coursesections/search?name=dynamics",
+            "filter": "\"GET /application/api/v1/institutions\" && \"/coursesections/search\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseSectionController.findCourseSectionByCode",
+            "request": "GET /application/api/v1/coursesections/findByCode?code=698553",
+            "filter": "\"GET /application/api/v1/coursesections/findByCode\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseSectionController.createEnrollment",
+            "request": "POST /application/api/v1/coursesections/19356/enroll?userId=107913&role=STUDENT",
+            "filter": "\"POST /application/api/v1/coursesections\" && \"enroll\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseSetupController.getCourseAccessModels",
+            "request": "GET /application/api/v1/courses/canvas/course/accessModels",
+            "filter": "\"GET /application/api/v1/courses/canvas/course/accessModels HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseSetupController.getCourseRecommendationOptions",
+            "request": "GET /application/api/v1/courses/canvas/course/recommendationOptions",
+            "filter": "\"GET /application/api/v1/courses/canvas/course/recommendationOptions HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseSetupController.getTimezones",
+            "request": "GET /application/api/v1/courses/timezones",
+            "filter": "\"GET /application/api/v1/courses/timezones HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CourseSetupController.createCanvasCourse",
+            "request": "POST /application/api/v1/courses/canvas/course",
+            "filter": "\"POST /application/api/v1/courses/canvas/course HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "EcommerceController.validateRegCode",
+            "request": "POST /application/api/v1/ecommerce/regcodes/validate",
+            "filter": "\"POST /application/api/v1/ecommerce/regcodes/validate HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "EcommerceController.getPurchaseOptions",
+            "request": "POST /application/api/v1/ecommerce/purchaseoptions",
+            "filter": "\"POST /application/api/v1/ecommerce/purchaseoptions HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "EcommerceController.launchShoppingCart",
+            "request": "POST /application/api/v1/ecommerce/launchcart",
+            "filter": "\"POST /application/api/v1/ecommerce/launchcart HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "EcommerceController.launchBackUrl",
+            "request": "GET /application/api/v1/ecommerce/redirect?linkid=269bbc2a-a2ea-4c64-8d8f-10b1984a4970",
+            "filter": "\"GET /application/api/v1/ecommerce/redirect\""
+        },
+        {
+            "transaction": "",
+            "class.method": "EcommerceController.burnRegCode",
+            "request": "POST /application/api/v1/ecommerce/regcodes/burn",
+            "filter": "\"POST /application/api/v1/ecommerce/regcodes/burn HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "EnrollmentController.enrollUserToCourseSection",
+            "request": "POST /application/api/v1/enrollments",
+            "filter": "\"POST /application/api/v1/enrollments HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "EnrollmentController.deleteEnrollment",
+            "request": "DELETE /application/api/v1/enrollments",
+            "filter": "\"DELETE /application/api/v1/enrollments HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "InstitutionCAPController.findByName",
+            "request": "GET /application/api/v1/cap/institutions/search?name=cornerstone",
+            "filter": "\"GET /application/api/v1/cap/institutions/search\""
+        },
+        {
+            "transaction": "",
+            "class.method": "InstitutionCAPController.findById",
+            "request": "GET /application/api/v1/cap/institutions/1316",
+            "filter": "\"GET /application/api/v1/cap/institutions\" && !\"search\" && !\"ids\" && !\"ficeDetails\" && !\"countries\""
+        },
+        {
+            "transaction": "",
+            "class.method": "InstitutionCAPController.findByIdList",
+            "request": "GET /application/api/v1/cap/institutions?ids=1743&ids=14226",
+            "filter": "\"GET /application/api/v1/cap/institutions\" && \"ids\""
+        },
+        {
+            "transaction": "",
+            "class.method": "InstitutionCAPController.createInstitution",
+            "request": "POST /application/api/v1/cap/institutions",
+            "filter": "\"POST /application/api/v1/cap/institutions HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "InstitutionCAPController.getFiceDetails",
+            "request": "GET /application/api/v1/cap/institutions/ficeDetails?ficeCode=B00010901&countryCode=360",
+            "filter": "\"GET /application/api/v1/cap/institutions/ficeDetails\""
+        },
+        {
+            "transaction": "",
+            "class.method": "InstitutionCAPController.getCountryList",
+            "request": "GET /application/api/v1/cap/institutions/countries",
+            "filter": "\"GET /application/api/v1/cap/institutions/countries HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "InstitutionController.findById",
+            "request": "GET /application/api/v1/institutions/13119",
+            "filter": "\"GET /application/api/v1/institutions\" && !\"search\" && !\"departments\""
+        },
+        {
+            "transaction": "",
+            "class.method": "InstitutionController.findByName",
+            "request": "GET /application/api/v1/institutions/search?name=Mad",
+            "filter": "\"GET /application/api/v1/institutions/search\""
+        },
+        {
+            "transaction": "",
+            "class.method": "InstitutionController.retrieveDepartmentsByInstitutionId",
+            "request": "GET /application/api/v1/institutions/5036/departments",
+            "filter": "\"GET /application/api/v1/institutions\" && \"departments HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LicenseController.getLicenseByProductIdAndUserProfileId",
+            "request": "GET /application/api/v1/licenses/product/4ae0b505-53f5-4882-aa83-bf8b1ebe7f61/user/100933",
+            "filter": "\"GET /application/api/v1/licenses/product\" && \"user\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LicenseController.getLicenseByProductIdAndExternalUserId",
+            "request": "GET /application/api/v1/licenses/product/2af118e3-5c43-484a-a031-90d5fdc2b5f9/externaluser/41635",
+            "filter": "\"GET /application/api/v1/licenses/product\" && \"externaluser\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LicenseController.checkEntitlement",
+            "request": "GET /application/api/v1/licenses/user/274498/coursesections/14664/checkentitlement",
+            "filter": "\"GET /application/api/v1/licenses/user\" && \"coursesections\" && \"checkentitlement\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LicenseController.searchLicense",
+            "request": "GET /application/api/v1/licenses/user/9295/search?productid=8155e79a-36b1-4f8b-a03b-61aef84c4ea7&licensestate=all",
+            "filter": "\"GET /application/api/v1/licenses/user\" && \"search\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LicenseController.updateLicense",
+            "request": "PUT /application/api/v1/licenses/138345",
+            "filter": "\"PUT /application/api/v1/licenses\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LicenseController.createTrialLicense",
+            "request": "POST /application/api/v1/licenses/trial",
+            "filter": "\"POST /application/api/v1/licenses/trial HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LicenseController.getLMSUserLicenses",
+            "request": "GET /application/api/v1/licenses/lmsusers/39445/search",
+            "filter": "\"GET /application/api/v1/licenses/lmsusers\" && \"search HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LicenseController.searchLicenseForExternalUser",
+            "request": "GET /application/api/v1/licenses/externaluser/42586/search?productid=44122c45-ba4a-41f7-bb62-f962973db547&licensestate=all",
+            "filter": "\"GET /application/api/v1/licenses/externaluser\" && \"search\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LmsCourseCAPController.getCourseDetails",
+            "request": "GET /application/api/v1/cap/lmscourses/1761",
+            "filter": "\"GET /application/api/v1/cap/lmscourses/\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LmsCourseSectionCAPController.getCourseDetails",
+            "request": "GET /application/api/v1/cap/lmscoursesections/2580",
+            "filter": "\"GET /application/api/v1/cap/lmscoursesections\" && !\"enrollments\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LmsCourseSectionCAPController.getEnrollmentsByCourseSectionId",
+            "request": "GET /application/api/v1/cap/lmscoursesections/2580/enrollments?includeLicense=true",
+            "filter": "\"GET /application/api/v1/cap/lmscoursesections\" && \"enrollments\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LmsCourseSectionCAPController.updateLMSCourseSection",
+            "request": "PUT /application/api/v1/cap/lmscoursesections/3374",
+            "filter": "\"PUT /application/api/v1/cap/lmscoursesections\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LMSUserCAPController.getExternalUserEnrollments",
+            "request": "GET /application/api/v1/cap/lmsusers/39445/enrollments",
+            "filter": "\"GET /application/api/v1/cap/lmsusers/\" && \"enrollments HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LMSUserCAPController.getExternalUser",
+            "request": "GET /application/api/v1/cap/lmsusers/39445",
+            "filter": "\"GET /application/api/v1/cap/lmsusers/\" && !\"enrollments\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LMSUserController.findExternalUserByKey",
+            "request": "GET /application/api/v1/lmsusers/{user_uuid}",
+            "filter": "\"GET /application/api/v1/lmsusers\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LtiConsumerCAPController.getLtiConsumerById",
+            "request": "GET /application/api/v1/cap/consumers/462",
+            "filter": "\"GET /application/api/v1/cap/consumers\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LtiConsumerController.getLmsTypes",
+            "request": "GET /application/api/v1/consumers/lti/types",
+            "filter": "\"GET /application/api/v1/consumers/lti/types HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "LtiConsumerController.search",
+            "request": "GET /application/api/v1/consumers/search?consumerKey=CANVAS_1313",
+            "filter": "\"GET /application/api/v1/consumers/search\""
+        },
+        {
+            "transaction": "",
+            "class.method": "ProductCAPController.getProducts",
+            "request": "GET /application/api/v1/cap/products/2068fb76-416c-4861-addd-ffe7de7155cb",
+            "filter": "\"GET /application/api/v1/cap/products\""
+        },
+        {
+            "transaction": "",
+            "class.method": "ProductController.getProductByISBN",
+            "request": "GET /application/api/v1/products/search?productIsbn=EPROF16334",
+            "filter": "\"GET /application/api/v1/products/search\""
+        },
+        {
+            "transaction": "",
+            "class.method": "UserCAPController.searchByFilter",
+            "request": "POST /application/api/v1/cap/users/searchbyfilter",
+            "filter": "\"POST /application/api/v1/cap/users/searchbyfilter HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "UserCAPController.enrollUserToMultipleSections",
+            "request": "PUT /application/api/v1/cap/users/5a911d4b-0d48-4b57-aafc-dfca1866f4d7/updateEnrollments?role=INSTRUCTOR",
+            "filter": "\"PUT /application/api/v1/cap/users\" && \"updateEnrollments\""
+        },
+        {
+            "transaction": "",
+            "class.method": "UserController.search",
+            "request": "GET /application/api/v1/users/search?role=INSTRUCTOR&example_canvas_user_id=6091&lti_consumer_id=1; /application/api/v1/users/search?login_name=borisandtamara@yahoo.com",
+            "filter": "\"GET /application/api/v1/users/search\""
+        },
+        {
+            "transaction": "",
+            "class.method": "UserController.getEnrollmentsByUserId",
+            "request": "GET /application/api/v1/users/271442/enrollments ",
+            "filter": "\"GET /application/api/v1/users\" && \"enrollments HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "UserController.findUserByKey",
+            "request": "GET /application/api/v1/users/findByKey?key=665830df-8069-46ee-8b1b-7d5ec77d5130",
+            "filter": "\"GET /application/api/v1/users/findByKey\""
+        },
+        {
+            "transaction": "",
+            "class.method": "UserController.checkLoginName",
+            "request": "GET /application/api/v1/users/checkLoginName?loginName=borisandtamara@yahoo.com",
+            "filter": "\"GET /application/api/v1/users/checkLoginName\""
+        },
+        {
+            "transaction": "",
+            "class.method": "UserController.forgotPassword",
+            "request": "POST /application/api/v1/users/forgotPassword",
+            "filter": "\"POST /application/api/v1/users/forgotPassword HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "UserController.activateLogin",
+            "request": "GET /application/api/v1/users/activateLogin?guid=61f62d57-459e-49d8-8fb7-b4ea2350ec67",
+            "filter": "\"GET /application/api/v1/users/activateLogin\""
+        },
+        {
+            "transaction": "",
+            "class.method": "UserController.findEnrollmentsBySections",
+            "request": "POST /application/api/v1/users/findEnrollmentsGroupedByUsers?role=STUDENT&page=0&size=10&sort=userProfile.lastName,ASC",
+            "filter": "\"POST /application/api/v1/users/findEnrollmentsGroupedByUsers\""
+        },
+        {
+            "transaction": "",
+            "class.method": "UserController.create",
+            "request": "POST /application/api/v1/users",
+            "filter": "\"POST /application/api/v1/users HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "UserController.acceptTermsOfService",
+            "request": "POST /application/api/v1/users/0a3d5ce0-201f-45cf-9bc1-58352d54370e/acceptTermsOfService",
+            "filter": "\"POST /application/api/v1/users\" && \"acceptTermsOfService\""
+        },
+        {
+            "transaction": "",
+            "class.method": "UserController.changeInstitutionForStudent",
+            "request": "PUT /application/api/v1/users/287781/changeInstitutionForStudent?institutionId=3704",
+            "filter": "\"PUT /application/api/v1/users\" && \"changeInstitutionForStudent\""
+        },
+        {
+            "transaction": "",
+            "class.method": "UserController.resetPasswordLink",
+            "request": "GET /application/api/v1/users/resetPasswordLink?guid=fd74c53b-890d-4706-b137-9d77e54faf15",
+            "filter": "\"GET /application/api/v1/users/resetPasswordLink\""
+        },
+        {
+            "transaction": "",
+            "class.method": "UserController.setPassword",
+            "request": "PUT /application/api/v1/users/setPassword",
+            "filter": "\"PUT /application/api/v1/users/setPassword HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "UserController.claimAccount",
+            "request": "POST /application/api/v1/users/claimAccount",
+            "filter": "\"POST /application/api/v1/users/claimAccount HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "UserController.resetPassword",
+            "request": "POST /application/api/v1/users/resetPassword",
+            "filter": "\"POST /application/api/v1/users/resetPassword HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "UserController.validatePassCode",
+            "request": "POST /application/api/v1/users/validatePassCode",
+            "filter": "\"POST /application/api/v1/users/validatePassCode HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "UserProfileCAPController.getUserDetails",
+            "request": "GET /application/api/v1/cap/userprofiles/{user_profile_id}",
+            "filter": "\"GET /application/api/v1/cap/userprofiles\" && !\"/lmsusers HTTP\" && !\"/enrollments HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "UserProfileCAPController.getEnrollments",
+            "request": "GET /application/api/v1/cap/userprofiles/{user_profile_id}/enrollments",
+            "filter": "\"GET /application/api/v1/cap/userprofiles\" && \"/enrollments HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "UserProfileCAPController.getLtiUserId",
+            "request": "GET /application/api/v1/cap/userprofiles/{user_profile_id}/lmsusers",
+            "filter": "\"GET /application/api/v1/cap/userprofiles\" && \"/lmsusers HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "UserProfileCAPController.updateUser",
+            "request": "PUT /application/api/v1/cap/userprofiles/{user_profile_id}",
+            "filter": "\"PUT /application/api/v1/cap/userprofiles\""
+        },
+        {
+            "transaction": "",
+            "class.method": "UserProfileController.updateClaimAccount",
+            "request": "/application/api/v1/userprofiles/{user_profile_id}/updateClaimedAccount",
+            "filter": "\"PUT /application/api/v1/userprofiles\" && \"updateClaimedAccount HTTP\""
+        }
+    ],
+    "service-outcome-service":  [
+        {
+            "transaction": "all requests",
+            "class.method": "service-outcome-service api",
+            "request": "/application/api/v1/outcomes",
+            "filter": "\"/application/api/v1/outcomes\" && !\"/version HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "ApiController.getHandlingRecord",
+            "request": "GET /application/api/v1/outcomes/handlingrecord/{record_uuid}",
+            "filter": "\"GET /application/api/v1/outcomes/handlingrecord\""
+        },
+        {
+            "transaction": "",
+            "class.method": "ApiController.ltiOutcome",
+            "request": "POST /application/api/v1/outcomes/lti/outcome?event_id={event_uuid}&event_source={event_source}&event_type={event_type}",
+            "filter": "\"POST /application/api/v1/outcomes/lti/outcome\""
+        }
+    ],
+    "service-event-service":  [
+        {
+            "transaction": "",
+            "class.method": "ApiController.postEvent",
+            "request": "POST /application/api/v1/event/learning/cp",
+            "filter": "\"POST /application/api/v1/event/learning/cp\""
+        }
+    ],
+    "service-ccs": [
+        {
+            "transaction": "all requests",
+            "class.method": "service-ccs api",
+            "request": "/application/api/v1/ccs",
+            "filter": "\"/application/api/v1/ccs\" && !\"/version HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CartridgeController.downloadCartridge",
+            "request": "GET /application/api/v1/ccs/cartridge/download/{cartridge_uuid}",
+            "filter": "\"GET /application/api/v1/ccs/cartridge/download\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CartridgeController.createCartridgeRequest",
+            "request": "POST /application/api/v1/ccs/cartridge",
+            "filter": "\"POST /application/api/v1/ccs/cartridge\""
+
+        }
+    ],
+    "service-auth": [
+        {
+            "transaction": "all requests",
+            "class.method": "service-auth api",
+            "request": "/application/api/v1/auth",
+            "filter": "\"/application/api/v1/auth\" && !\"/version HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "AuthController.login",
+            "request": "POST /application/api/v1/auth/login",
+            "filter": "\"POST /application/api/v1/auth/login\""
+        },
+        {
+            "transaction": "",
+            "class.method": "AuthController.logout",
+            "request": "POST /application/api/v1/auth/logout",
+            "filter": "\"POST /application/api/v1/auth/logout\""
+
+        },
+        {
+            "transaction": "",
+            "class.method": "AuthController.refresh",
+            "request": "POST /application/api/v1/auth/refresh",
+            "filter": "\"POST /application/api/v1/auth/refresh\""
+        }
+    ],
+    "service-meta": [
+        {
+            "transaction": "all requests",
+            "class.method": "service-meta api",
+            "request": "/application/api/v1/meta",
+            "filter": "\"/application/api/v1/meta\" && !\"/version HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CountersController.getMediaResourcesTotalCounter",
+            "request": "GET /application/api/v1/meta/media/resourcesTotal",
+            "filter": "\"GET /application/api/v1/meta/media/resourcesTotal\""
+        },
+        {
+            "transaction": "",
+            "class.method": "CountersController.getEBookResourcesTotalCounter",
+            "request": "GET /application/api/v1/meta/ebook/resourcesTotal",
+            "filter": "\"GET /application/api/v1/meta/ebook/resourcesTotal\""
+        },
+        {
+            "transaction": "",
+            "class.method": "FoldersController.getFolders",
+            "request": "GET /application/api/v1/meta/folders",
+            "filter": "\"GET /application/api/v1/meta/folders HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "FoldersController.getFoldersWithResourceCounters",
+            "request": "GET /application/api/v1/meta/folders/full?timestamp={timestamp}",
+            "filter": "\"GET /application/api/v1/meta/folders/full\""
+        },
+        {
+            "transaction": "",
+            "class.method": "MetaController.progress",
+            "request": "GET /application/api/v1/meta/task/{task_uuid}/status?timestamp={timestamp}",
+            "filter": "\"GET /application/api/v1/meta/task/\" && \"status\""
+        },
+        {
+            "transaction": "",
+            "class.method": "MetaController.loadObjectType",
+            "request": "GET /application/api/v1/meta/type/product",
+            "filter": "\"GET /application/api/v1/meta/type/product HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "MetaController.shortResult",
+            "request": "GET /application/api/v1/meta/validate/task/{task_uuid}/summary?timestamp={timestamp}",
+            "filter": "\"GET /application/api/v1/meta/validate/task\" && \"summary\""
+        },
+        {
+            "transaction": "",
+            "class.method": "MetaController.validate",
+            "request": "POST /application/api/v1/meta/validate",
+            "filter": "\"POST /application/api/v1/meta/validate HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "MetaController.uploadShortResult",
+            "request": "GET /application/api/v1/meta/upload/task/{task_uuid}/summary?timestamp={timestamp}",
+            "filter": "\"GET /application/api/v1/meta/upload/task\" && \"summary\""
+        },
+        {
+            "transaction": "",
+            "class.method": "MetaController.upload",
+            "request": "POST /application/api/v1/meta/upload/task",
+            "filter": "\"POST /application/api/v1/meta/upload/task HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "MetaController.validateResourceEntryPoint",
+            "request": "POST /application/api/v1/meta/resource/entrypoint/validate",
+            "filter": "\"POST /application/api/v1/meta/resource/entrypoint/validate HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "MetaController.validateEBook",
+            "request": "POST /application/api/v1/meta/product/{product_uuid}/ebook/validate",
+            "filter": "\"POST /application/api/v1/meta/product\" && \"/ebook/validate HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "MetaController.uploadEBook",
+            "request": "POST /application/api/v1/meta/product/{product_uuid}/ebook/upload/task/{task_uuid}",
+            "filter": "\"POST /application/api/v1/meta/product\" && \"/ebook/upload/task\""
+        },
+        {
+            "transaction": "",
+            "class.method": "MetaController.downloadReportWithCorrectRows",
+            "request": "GET /application/api/v1/meta/validate/task/{task_uuid}/report/full?timestamp={timestamp}",
+            "filter": "\"GET /application/api/v1/meta/validate/task\" && \"/report/full\""
+        },
+        {
+            "transaction": "",
+            "class.method": "MetaController.updateResourceEntryPoint",
+            "request": "POST /application/api/v1/meta/resource/{resource_uuid}/entrypoint/update",
+            "filter": "\"POST /application/api/v1/meta/resource\" && \"/entrypoint/update HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "MetaController.updateProductCoverImage",
+            "request": "POST /application/api/v1/meta/product/{product_uuid}/cover/portrait/update",
+            "filter": "\"POST /application/api/v1/meta/product\" && \"/cover/portrait/update HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "ProductController.loadProduct",
+            "request": "GET /application/api/v1/meta/product/{product_uuid}",
+            "filter": "\"GET /application/api/v1/meta/product\" && !\"structure\" && !\"modules\"  && !\"sections\""
+        },
+        {
+            "transaction": "",
+            "class.method": "ProductController.exportProductStructure",
+            "request": "GET /application/api/v1/meta/product/{product_uuid}/structure/export?timestamp={timestamp}",
+            "filter": "\"GET /application/api/v1/meta/product\" && \"/structure/export\""
+        },
+        {
+            "transaction": "",
+            "class.method": "ProductController.updateProduct",
+            "request": "POST /application/api/v1/meta/product/{product_uuid}/update",
+            "filter": "\"POST /application/api/v1/meta/product\" && \"update HTTP\" && !\"cover\""
+        }
+    ],
+    "service-content": [
+        {
+            "transaction": "all requests",
+            "class.method": "service-content api",
+            "request": "/application/api/v1/content",
+            "filter": "\"/application/api/v1/content\" && !\"/version HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "ContentController.getProductCoverImage",
+            "request": "GET /application/api/v1/content/product/{product_uuid}/cover/portrait",
+            "filter": "\"GET /application/api/v1/content/product\" && \"/cover/portrait\""
+        },
+        {
+            "transaction": "",
+            "class.method": "ContentController.getResource",
+            "request": "GET /application/api/v1/content/resource/{resource_uuid}",
+            "filter": "\"GET /application/api/v1/content/resource\""
+        },
+        {
+            "transaction": "",
+            "class.method": "ContentController.previewResource",
+            "request": "GET /application/api/v1/content/preview/resource/{resource_uuid}",
+            "filter": "\"GET /application/api/v1/content/preview/resource\""
+        }
+    ],
+    "service-search": [
+        {
+            "transaction": "all requests",
+            "class.method": "service-search api",
+            "request": "/application/api/v1/search",
+            "filter": "\"/application/api/v1/search\" && !\"/version HTTP\""
+        },
+        {
+            "transaction": "",
+            "class.method": "SearchController.searchProducts",
+            "request": "POST /application/api/v1/search/products",
+            "filter": "\"POST /application/api/v1/search/products\""
+        },
+        {
+            "transaction": "",
+            "class.method": "SearchController.searchResources",
+            "request": "POST /application/api/v1/search/resources",
+            "filter": "\"POST /application/api/v1/search/resources\" && !\"export\""
+        },
+        {
+            "transaction": "",
+            "class.method": "SearchController.exportSearchResult",
+            "request": "POST /application/api/v1/search/resources/export",
+            "filter": "\"POST /application/api/v1/search/resources/export\""
+        },
+        {
+            "transaction": "",
+            "class.method": "SearchController.searchEBookResources",
+            "request": "POST /application/api/v1/search/ebook",
+            "filter": "\"POST /application/api/v1/search/ebook\" && !\"export\""
+        },
+        {
+            "transaction": "",
+            "class.method": "SearchController.getResourceInformation",
+            "request": "GET /application/api/v1/search/resource/{resource_uuid}/info?timestamp={timestamp}",
+            "filter": "\"\" && \"info\""
+        },
+        {
+            "transaction": "",
+            "class.method": "SearchController.getResourceConnectedProducts",
+            "request": "GET /application/api/v1/search/resource/{resource_uuid}/connectedproducts?timestamp={timestamp}",
+            "filter": "\"GET /application/api/v1/search/resource\" && \"connectedproducts\""
+        },
+        {
+            "transaction": "",
+            "class.method": "SearchController.exportSearchEbook",
+            "request": "POST /application/api/v1/search/ebook/export",
+            "filter": "\"POST /application/api/v1/search/ebook/export\""
+        }
+    ],
+    "service-delivery-cache": [
+        {
+            "transaction": "all requests",
+            "filter": "(\"/application/api/v1/auth\" || \"/application/api/v1/meta\" || \"/application/api/v1/search\" || \"/application/api/v1/content\") && !\"/version HTTP\""
+        }
+    ]
+}

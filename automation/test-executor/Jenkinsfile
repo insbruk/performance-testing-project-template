@@ -1,0 +1,63 @@
+pipeline {
+    agent any
+        parameters {
+        choice(
+            name: 'ALM_DOMAIN',
+            choices: ['DOMAIN1', 'DOMAIN2', 'DOMAIN3'],
+            description: 'Performance Center Domain')
+        choice(
+            name: 'ALM_PROJECT',
+            choices: ['PROJECT1', 'PROJECT2'],
+            description: 'Performance Center Project')
+        choice(
+            name: 'ALM_TEST',
+            choices: [
+                'performance-test-x1.00',
+                'performance-test-x2.00',
+                'performance-test-x3.00',
+            ],
+            description: 'Performance Test')
+        string(
+            name: 'ALM_TEST_RUN_ID',
+            defaultValue: '00000',
+            description: 'Performance Center Test Run ID')
+        string(
+            name: 'RELEASE',
+            defaultValue: '1.00',
+            description: 'Confluence page name. Enter just release number. Prefix "Release " will be added automatically.')
+    }
+    stages {
+        stage('Create test report') {
+            steps {
+                script {
+                    currentBuild.displayName = "#${ALM_TEST_RUN_ID} ${ALM_TEST}"
+                    // SPRINTcurrentBuild.description = "The best description."
+                }
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [
+                        [name: '*/master']
+                    ],
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [],
+                    submoduleCfg: [],
+                    userRemoteConfigs: [
+                        [credentialsId: 'wmuser-knlhe', url: 'git@github.com:example/perf-app.git']
+                    ]
+                ])
+                dir('automation/report-generator') {
+                    sh '''
+                    ls
+                    python3 -m venv virtualenv
+                    source virtualenv/bin/activate
+                    python -m pip install --upgrade pip
+                    python -m pip install -r requirements.txt
+                    python -m pip freeze
+                    python -u report-generator.py ${ALM_DOMAIN} ${ALM_PROJECT} ${ALM_TEST} ${ALM_TEST_RUN_ID} ${RELEASE}
+                    '''
+                    echo 'Performance test report successfully created!'
+                }
+            }
+        }
+    }
+}

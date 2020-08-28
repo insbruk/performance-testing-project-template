@@ -1,0 +1,62 @@
+pipeline {
+    agent any
+    parameters {
+        choice(
+            name: 'WHERE',
+            choices: [
+                'both',
+                'jira',
+                'confluence',
+            ],
+            description: 'Where to create sprint tasks/pages'
+        )
+        string(
+            name: 'SPRINT',
+            defaultValue: 'XX',
+            description: 'Sprint number, will be created page with name "Sprint XX"'
+        )
+    }
+    stages {
+        stage('Creating sprint') {
+            steps {
+                script {
+                    currentBuild.displayName = "#${BUILD_NUMBER} Sprint ${SPRINT}"
+                    // currentBuild.description = "The best description."
+                }
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [
+                        [name: '*/master']
+                    ],
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [],
+                    submoduleCfg: [],
+                    userRemoteConfigs: [
+                        [credentialsId: 'wvuser-he', url: 'git@github.com:example/perf-app.git']
+                    ]
+                ])
+                dir('automation/sprints') {
+                    sh '''
+                    ls
+                    python3 -m venv virtualenv
+                    source virtualenv/bin/activate
+                    python -m pip install --upgrade pip
+                    python -m pip install -r requirements.txt
+                    python -m pip freeze
+                    if [ "$WHERE" = "jira" ]; then
+                        python -u create_sprint_in_jira.py ${SPRINT}
+                    fi
+                    if [ "$WHERE" = "confluence" ]; then
+                        python -u create_sprint_in_confluence.py ${SPRINT}
+                    fi
+                     if [ "$WHERE" = "both" ]; then
+                        python -u create_sprint_in_confluence.py ${SPRINT}
+                        python -u create_sprint_in_jira.py ${SPRINT}
+                    fi
+                    printf '%s Tasks/Pages successfully collected!' $SPRINT
+                    '''
+                }
+            }
+        }
+    }
+}
